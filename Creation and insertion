@@ -1,0 +1,84 @@
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+    int val;
+    Node* next;
+    Node(int data){
+        val=data;
+        next=NULL;
+    }
+};
+
+class CircularLinkedList{
+    public:
+    Node* head;
+    
+    CircularLinkedList(){
+        head=NULL;
+    }
+    
+    void insertAtHead(int data){
+    Node* newnode= new Node(data);
+    if(head==NULL){
+        head=newnode;
+        newnode->next=head;
+        return;
+    }
+    Node* tail= head;
+    while(tail->next!=head){
+        tail=tail->next;
+    }
+    tail->next= newnode;
+    newnode->next= head;
+    head= newnode;
+    }
+    
+    void insertAtEnd(int data){
+    Node* newnode= new Node(data);
+    if(head==NULL){
+        head=newnode;
+        newnode->next=head;
+        return;
+    }
+    Node* tail= head;
+    while(tail->next!=head){
+        tail=tail->next;
+    }
+    tail->next= newnode;
+    newnode->next= head;
+    //head= newnode;
+    }
+
+    void display(){
+        Node* temp= head;
+        do{
+            cout<<temp->val<<"->";
+            temp=temp->next;
+        }while(temp!=head);
+        
+        cout<<endl;
+    }
+    
+    void displaycircular(){
+        Node* temp=head;
+        for(int i=0; i<20; i++){
+            cout<< temp->val<< "->";
+            temp=temp->next;
+        }
+        cout<<endl;
+    }
+};
+
+int main() {
+    CircularLinkedList cll;
+    
+    cll.insertAtHead(3);
+    cll.insertAtHead(2);
+    cll.insertAtHead(1);
+    cll.insertAtEnd(4);
+    cll.display();
+    cll.displaycircular();
+    return 0;
+}
